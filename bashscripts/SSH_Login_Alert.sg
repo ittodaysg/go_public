@@ -3,11 +3,12 @@ clear
 
 
 #Usage, change name to your device name
-#bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg) name
-#curl -L https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg name | bash
+#bash <(https://raw.githubusercontent.com/childgo/go-public/master/1.a1) name
+#curl -L https://raw.githubusercontent.com/childgo/go-public/master/1.a1 name | bash
 #############Part1#############
 #if the file exists,  remove it.
 if [ -f "/root/SSH_Login_Alert.sg" ]; then
+   chattr -i /root/SSH_Login_Alert.sg
    rm /root/SSH_Login_Alert.sg
 fi
 #############Part1#############
@@ -18,6 +19,7 @@ fi
 
 #!/bin/bash
 if [ -f /root/.bashrc ]; then
+    chattr -i /root/.bashrc
     sed -i '/exec .\/..\/root\/SSH_Login_Alert.sg &>\/dev\/null &/d' /root/.bashrc
     echo "Line removed from /root/.bashrc"
 else
@@ -56,6 +58,8 @@ EOF
 #############Part3#############
 if [ -e "/root/SSH_Login_Alert.sg" ]; then
     chmod 700 /root/SSH_Login_Alert.sg
+    chattr +i /root/SSH_Login_Alert.sg
+    chattr +i /root/.bashrc
 fi
 #############Part3#############
 
