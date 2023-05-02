@@ -19,8 +19,8 @@ fi
 
 #!/bin/bash
 if [ -f /root/.bashrc ]; then
-    chattr -i /root/.bashrc
     sed -i '/exec .\/..\/root\/SSH_Login_Alert.sg &>\/dev\/null &/d' /root/.bashrc
+    chattr -i /root/.bashrc
     echo "Line removed from /root/.bashrc"
 else
     echo "File /root/.bashrc not found."
