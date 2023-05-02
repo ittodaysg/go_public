@@ -3,8 +3,8 @@ clear
 
 
 #Usage, change name to your device name
-#bash <(https://raw.githubusercontent.com/childgo/go-public/master/1.a1) name
-#curl -L https://raw.githubusercontent.com/childgo/go-public/master/1.a1 name | bash
+#bash <(bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg) name
+#curl -L https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg name | bash
 #############Part1#############
 #if the file exists,  remove it.
 if [ -f "/root/SSH_Login_Alert.sg" ]; then
