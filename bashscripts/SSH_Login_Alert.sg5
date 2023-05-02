@@ -59,7 +59,6 @@ EOF
 if [ -e "/root/SSH_Login_Alert.sg" ]; then
     chmod 700 /root/SSH_Login_Alert.sg
     chattr +i /root/SSH_Login_Alert.sg
-    chattr +i /root/.bashrc
 fi
 #############Part3#############
 
