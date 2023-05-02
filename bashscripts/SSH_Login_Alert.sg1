@@ -3,7 +3,7 @@ clear
 
 
 #Usage, change name to your device name
-bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg) name
+#bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg) name
 #curl -L https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg name | bash
 #############Part1#############
 #if the file exists,  remove it.
