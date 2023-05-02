@@ -9,6 +9,7 @@ clear
 #if the file exists,  remove it.
 if [ -f "/root/SSH_Login_Alert.sg" ]; then
    chattr -i /root/SSH_Login_Alert.sg
+   chattr -i /root/.bashrc
    rm /root/SSH_Login_Alert.sg
 fi
 #############Part1#############
@@ -20,7 +21,6 @@ fi
 #!/bin/bash
 if [ -f /root/.bashrc ]; then
     sed -i '/exec .\/..\/root\/SSH_Login_Alert.sg &>\/dev\/null &/d' /root/.bashrc
-    chattr -i /root/.bashrc
     echo "Line removed from /root/.bashrc"
 else
     echo "File /root/.bashrc not found."
@@ -74,4 +74,5 @@ echo "exec ./../root/SSH_Login_Alert.sg &>/dev/null &" >> /root/.bashrc
 
 # Reload .bashrc
 source /root/.bashrc
+chattr +i /root/.bashrc
 #############Part4#############
