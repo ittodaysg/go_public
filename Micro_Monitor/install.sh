@@ -43,4 +43,10 @@ EOF
 
 
 #Run Command
+sudo systemctl daemon-reload
+udo systemctl start SG_MyMonitor.timer
+sudo systemctl enable SG_MyMonitor.timer
+
+
+
 
