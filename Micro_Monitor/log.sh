@@ -9,16 +9,6 @@ date_auto=$(date +%Y-%m-%d)
 time_auto=$(date +%H:%M:%S)
 
 
-##################################################################
-HOSTNAME='66.111.53.30'
-DATABASE='officesupport_serverinfo'
-USERNAME='officesupport_onlyinput'
-PASSWORD='rf43r3reS3re'
-#####mysql fisnih#################################################
-
-
-
-
 
 
 echo ""
