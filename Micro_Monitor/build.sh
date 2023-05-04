@@ -24,7 +24,6 @@ EOF
 ###########################################################
 #Create SG_MyMonitor.timer
 cat <<EOF > /etc/systemd/system/SG_MyMonitor_Start.service
-
 [Unit]
 Description=Start SG Service
 
@@ -39,6 +38,9 @@ WantedBy=multi-user.target
 
 
 EOF
-
-
 ###########################################################
+
+
+
+#Run Command
+
