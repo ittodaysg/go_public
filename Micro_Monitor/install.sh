@@ -29,7 +29,7 @@ Description=Start SG Service
 
 [Service]
 #ExecStart=/usr/share/alsc/start.sg.x  --no-repeat
-ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/micro_monitor.sh | bash -s -- --no-repeat"
+ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/ittodaysg/go_public/main/Micro_Monitor/log.sh | bash -s -- --no-repeat"
 
 #Restart=always
 
