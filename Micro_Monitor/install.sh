@@ -2,13 +2,13 @@
 clear
 ###########################################################
 #Create SG_MyMonitor.timer
-cat <<EOF > /etc/systemd/system/SG_log.timer
+cat <<EOF > /etc/systemd/system/SG_Log.timer
 [Unit]
 Description=Run start.sg.x every 2 minutes
 
 [Timer]
 OnCalendar=*:0/2
-Unit=SG_Kog_Start.service
+Unit=SG_Log_Start.service
 
 [Install]
 WantedBy=multi-user.target
@@ -23,7 +23,7 @@ EOF
 
 ###########################################################
 #Create SG_MyMonitor.timer
-cat <<EOF > /etc/systemd/system/SG_Kog_Start.service
+cat <<EOF > /etc/systemd/system/SG_Log_Start.service
 [Unit]
 Description=Start SG Service
 
@@ -43,8 +43,8 @@ EOF
 
 #Run Command
 sudo systemctl daemon-reload
-sudo systemctl start SG_log.timer
-sudo systemctl enable SG_log.timer
+sudo systemctl start SG_Log.timer
+sudo systemctl enable SG_Log.timer
 
 
 
