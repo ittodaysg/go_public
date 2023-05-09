@@ -3,14 +3,6 @@ clear
 
 
 
-Package_ID=$(date '+%Y-%m-%d---%H-%M-%S')
-
-date_auto=$(date +%Y-%m-%d)
-time_auto=$(date +%H:%M:%S)
-
-
-
-
 echo ""
 ########################################################################
 #Working with Server Info
@@ -396,7 +388,21 @@ full_Concurrent_Connection+="[WHM Secure Port: 2087]\n$(ss -ant '( sport = :2087
 full_Concurrent_Connection+="[WHM UnSecure: 2086]\n$(ss -ant '( sport = :2086 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
 
 
-#echo -e $full_Concurrent_Connection
+echo -e $full_Concurrent_Connection
+echo ""
+
+########################################################################
+
+
+
+
+
+########################################################################
+#WebServer Info And Module
+WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
+#WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
+echo $WebServerInfo
+
 ########################################################################
 
 
@@ -404,12 +410,52 @@ full_Concurrent_Connection+="[WHM UnSecure: 2086]\n$(ss -ant '( sport = :2086 )'
 
 
 
+########################################################################
+#current time zone 
+
+current_time_zone=$(timedatectl);
+current_time_zone=$(echo "$current_time_zone" | sed "s/'//g")
+echo $current_time_zone
+########################################################################
 
 
 
 
+########################################################################
+#To get the total number of emails in the mail queue in CentOS Linux
+#email_queue=$(exim -bpc)
+
+#this new command will print zero if command not found
+email_queue=$(if exim -bpc >/dev/null 2>&1; then exim -bpc; else echo "0"; fi)
 
 
+echo "Total number of emails in the mail queue: $email_queue"
+########################################################################
+
+
+
+
+########################################################################
+#To get the total number of emails in the mail queue in CentOS Linux
+lsblk_command=$(lsblk)
+echo "lsblk Command: $lsblk_command"
+########################################################################
+
+
+
+########################################################################
+#To get the total number of emails in the mail queue in CentOS Linux
+disk_iowait_check=$(hostname)
+echo "Disk Iowait check: $disk_iowait_check"
+########################################################################
+
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
 
 
 
@@ -460,13 +506,15 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "Hosts_Allow=$Hosts_Allow" \
   -d "cmd_uptime=$cmd_uptime" \
   -d "full_Concurrent_Connection=$full_Concurrent_Connection" \
+  -d "email_queue=$email_queue" \
+  -d "WebServerInfo=$WebServerInfo" \
+  -d "current_time_zone=$current_time_zone" \
   -d "server_disk_usage=$server_disk_usage" \
   -d "ssh_connnection_ip=$ssh_connnection_ip" \
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
-  -d "network_up_down=$Network_up_down" \
-  -d "date_auto=$date_auto" \
-  -d "time_auto=$time_auto" \
-  -d "Package_ID=$Package_ID"
+  -d "lsblk_command=$lsblk_command" \
+  -d "disk_iowait_check=$disk_iowait_check" \
+  -d "network_up_down=$Network_up_down"
 
 
 
