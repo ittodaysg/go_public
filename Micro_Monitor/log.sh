@@ -51,17 +51,28 @@ echo -e "\n\n"
 #Working with Concurrent Connections
 ########################################################################
 
-Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
+#Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
+Port_80_Connection=$(netstat -an | grep :80 | wc -l)
 echo "Port_80_Connection: $Port_80_Connection"
 
 
 
-Port_443_Connection=$(netstat -an | grep :443 | grep ESTABLISHED | wc -l)
+#Port_443_Connection=$(netstat -an | grep :443 | grep ESTABLISHED | wc -l)
+Port_443_Connection=$(netstat -an | grep :443 | wc -l)
 echo "Port_443_Connection: $Port_443_Connection"
 
 
-Port_3306_Connection=$(netstat -an | grep :3306 | grep ESTABLISHED | wc -l)
+#Port_3306_Connection=$(netstat -an | grep :3306 | grep ESTABLISHED | wc -l)
+Port_3306_Connection=$(netstat -an | grep :3306 | wc -l)
 echo "Port_3306_Connection: $Port_3306_Connection"
+
+
+#Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | grep ESTABLISHED | wc -l)
+Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | wc -l)
+echo "Port 80 and 443: $Port_80and443_Connection"
+
+
+
 
 ########################################################################
 #End,Working with RAM
@@ -358,6 +369,10 @@ Port_2096_Connection=$(netstat -an | grep :2096 | grep ESTABLISHED | wc -l)
 echo "Port_2096_Connection: $Port_2096_Connection"
 
 
+Port_2095and2096_Connection=$(netstat -an | grep -E '(:2095|:2096)' | grep ESTABLISHED | wc -l)
+echo "Port 2095 and 2096: $Port_2095and2096_Connection"
+
+
 Port_873_Connection=$(netstat -an | grep :873 | grep ESTABLISHED | wc -l)
 echo "Port_873_Connection: $Port_873_Connection"
 
@@ -485,6 +500,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "RAM_usage_percentage=$RAM_usage_percentage" \
   -d "Port_80_Connection=$Port_80_Connection" \
   -d "Port_443_Connection=$Port_443_Connection" \
+  -d "Port_80and443_Connection=$Port_80and443_Connection" \
   -d "Port_3306_Connection=$Port_3306_Connection" \
   -d "Port_21_Connection=$Port_21_Connection" \
   -d "Port_22_Connection=$Port_22_Connection" \
@@ -503,6 +519,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "Port_2087_Connection=$Port_2087_Connection" \
   -d "Port_2095_Connection=$Port_2095_Connection" \
   -d "Port_2096_Connection=$Port_2096_Connection" \
+  -d "Port_2095and2096_Connection=$Port_2095and2096_Connection" \
   -d "Port_873_Connection=$Port_873_Connection" \
   -d "Port_5432_Connection=$Port_5432_Connection" \
   -d "CSF_firewall_status=$CSF_firewall_status" \
