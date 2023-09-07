@@ -2,7 +2,6 @@
 clear
 
 
-
 echo ""
 ########################################################################
 #Working with Server Info
@@ -418,7 +417,13 @@ echo ""
 
 ########################################################################
 #WebServer Info And Module
-WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
+#WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
+#WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo '';  httpd -M;);
+
+
+WebServerInfo=$(echo 'Nginx Version:'; nginx -V 2>&1 | tr -d "'" | sed "s/--/\n/g"; echo ''; echo 'Apache installed modules:'; httpd -v; echo ''; httpd -M | tr -d "'")
+
+
 #WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
 echo $WebServerInfo
 
@@ -431,9 +436,7 @@ echo $WebServerInfo
 
 ########################################################################
 #current time zone 
-
-current_time_zone=$(timedatectl);
-current_time_zone=$(echo "$current_time_zone" | sed "s/'//g")
+current_time_zone=$(timedatectl --no-pager | tr -d "'")
 echo $current_time_zone
 ########################################################################
 
@@ -452,6 +455,15 @@ echo "Total number of emails in the mail queue: $email_queue"
 ########################################################################
 
 
+
+########################################################################
+#Bandwith
+bandwidth_Download_Num=1
+bandwidth_Download_Rate=2
+bandwidth_Upload_Num=3
+bandwidth_Upload_Rate=4
+
+########################################################################
 
 
 ########################################################################
@@ -529,6 +541,10 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "cmd_uptime=$cmd_uptime" \
   -d "full_Concurrent_Connection=$full_Concurrent_Connection" \
   -d "email_queue=$email_queue" \
+  -d "bandwidth_Download_Num=$bandwidth_Download_Num" \
+  -d "bandwidth_Download_Rate=$bandwidth_Download_Rate" \
+  -d "bandwidth_Upload_Num=$bandwidth_Upload_Num" \
+  -d "bandwidth_Upload_Rate=$bandwidth_Upload_Rate" \
   -d "WebServerInfo=$WebServerInfo" \
   -d "current_time_zone=$current_time_zone" \
   -d "server_disk_usage=$server_disk_usage" \
@@ -542,5 +558,4 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
 
 echo ""
 exit
-
 
